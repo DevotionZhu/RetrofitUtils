@@ -41,7 +41,8 @@ dependencies {
 
     implementation 'androidx.preference:preference:1.0.0'
 
-    implementation ('com.aliyun.ams:alicloud-android-httpdns:1.3.2.3@aar') {
-        transitive true
-    }
+//    dns域名解析
+//    implementation ('com.aliyun.ams:alicloud-android-httpdns:1.3.2.3@aar') {
+//        transitive true
+//    }
 }
