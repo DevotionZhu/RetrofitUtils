@@ -3,16 +3,13 @@ package com.example.retrofitutils;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.network.HttpUtils;
-import com.example.network.api.APIService;
-import com.example.network.api.BannerBean;
+import com.example.retrofitutils.api.APIService;
+import com.example.retrofitutils.api.BannerBean;
+import com.example.network.oberver.BaseOberver;
 
-import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,26 +19,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new HttpUtils().getService().create(APIService.class).getBanner().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<BannerBean>() {
-            @Override
-            public void onSubscribe(Disposable d) {
+        new HttpUtils()
+                .getService()
+                .create(APIService.class)
+                .getBanner()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseOberver<BannerBean>() {
+                    @Override
+                    public void onSuccess(BannerBean bannerBean) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(BannerBean bannerBean) {
-                Toast.makeText(MainActivity.this,bannerBean.getErrmsg(), Toast.LENGTH_SHORT).show();
-            }
+                    @Override
+                    public void onFail(Throwable e) {
 
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+                    }
+                });
     }
 }

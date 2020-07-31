@@ -1,5 +1,7 @@
 package com.example.network;
 
+import com.example.network.interceptor.HeaderInterceptor;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -24,7 +26,8 @@ public class HttpUtils {
 
     public OkHttpClient getOk(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(new HeaderInterceptor());
 
         return builder.build();
     }

@@ -1,4 +1,4 @@
-package com.example.network.api;
+package com.example.retrofitutils.api;
 
 import java.util.List;
 
